@@ -1,0 +1,305 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.RegistrerenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views" xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             mc:Ignorable="d" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{StaticResource PrimaryHueMidBrush}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             Height="auto" Width="auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Section 1: Title-->
+
+            <DockPanel 
+                Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_UserCircle" 
+                        Width="30" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="{Binding ViewTitle}">
+                    </TextBlock>
+                    <TextBlock
+                        FontWeight="Light"
+                        TextWrapping="Wrap"
+                        Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                        Text="Maak hier uw account aan.">
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+            <!--Section 2: Information adding-->
+
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},
+                Delay=250}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                Height="Auto"
+                Width="Auto"
+                MinHeight="550"
+                MinWidth="800"
+                Grid.Row="1">
+                <Grid 
+                    Background="{StaticResource PrimaryHueDarkBrush}" 
+                    Height="Auto"
+                    Width="Auto"
+                    MinHeight="550"
+                    MinWidth="800">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Margin="10"
+                        Grid.ColumnSpan="2">
+                        <Label 
+                            Content="E-mail">
+                        </Label>
+                        <TextBox 
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            materialDesign:HintAssist.Hint="E-mailadres"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.Email}"
+                        />
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Grid.ColumnSpan="2" 
+                        Grid.Column="2"
+                        Margin="10">
+                        <Label
+                            Content="Voornaam">
+                        </Label>
+                        <TextBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            materialDesign:HintAssist.Hint="Voornaam"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.Name}"
+                        />
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="2"
+                        Margin="10">
+                        <Label 
+                            Content="Wachtwoord">
+                        </Label>
+                        <PasswordBox
+                            Style="{StaticResource MaterialDesignFilledPasswordBox}"
+                            x:Name="txtWachtwoord"
+                            Margin="10"          
+                            PasswordChanged="PasswordBox_PasswordChanged"
+                            materialDesign:HintAssist.Hint="Wachtwoord"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="2" 
+                        Grid.Column="2"
+                        Margin="10">
+                        <Label 
+                            Content="Naam">
+                        </Label>
+                        <TextBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            materialDesign:HintAssist.Hint="Naam"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.Surname}"
+                        />
+                    </StackPanel>
+                   
+                    <StackPanel 
+                        Grid.Row="2" 
+                        Grid.ColumnSpan="2"
+                        Margin="10">
+                        <Label 
+                            Content="Bevestig Wachtwoord">
+                        </Label>
+                        <PasswordBox
+                            Margin="10"
+                            PasswordChanged="ConfirmPassword_PasswordChanged"
+                            Style="{StaticResource MaterialDesignFilledPasswordBox}"
+                            materialDesign:HintAssist.Hint="Bevestig Wachtwoord"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"/>
+                    </StackPanel>
+                   
+                    <StackPanel 
+                        Grid.Row="2" 
+                        Grid.ColumnSpan="2" 
+                        Grid.Column="2"
+                        Margin="10">
+                        <Label 
+                            Content="Straat">
+                        </Label>
+                        <TextBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            materialDesign:HintAssist.Hint="Straat"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.StreetName}"
+                        />
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Grid.Row="3" 
+                        Grid.Column="2"
+                        Margin="10">
+                        <Label 
+                            Content="Postcode">
+                        </Label>
+                        <TextBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            materialDesign:HintAssist.Hint="Postcode"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.PostalCode}"
+                        />
+                    </StackPanel>
+                   
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="10">
+                        <Label 
+                            Content="Land">
+                        </Label>
+                        <ComboBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledComboBox}"
+                            materialDesign:HintAssist.Hint="Land"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            ItemsSource="{Binding Countries}"
+                            SelectedItem="{Binding User.Country}"
+                        />
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Grid.Row="3" 
+                        Grid.Column="3"
+                        Margin="10">
+                        <Label 
+                            Content="Huisnummer">
+                        </Label>
+                        <TextBox
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            
+                            materialDesign:HintAssist.Hint="Huisnummer"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            Text="{Binding User.HouseNumber}"
+                        />
+                    </StackPanel>
+                    
+                    <CheckBox
+                        Visibility="{Binding Path=TitleIsAdminToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Grid.Row="4" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        Content="Ik heb de algemene voorwaarden gelezen en ga hiermee akkoord" 
+                        IsChecked="{Binding Accepted}"
+                        Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                        Background="{DynamicResource SecondaryHueMidBrush}"
+                    />
+                    <Button 
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Content="{Binding ViewTitle}"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        Command="{Binding}"
+                        CommandParameter="Register"
+                    />
+                    <Button 
+                        Grid.Row="5"
+                        Grid.Column="2"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Content="Annuleren"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{DynamicResource SecondaryHueMidForegroundBrush}"
+                        Command="{Binding}"
+                        CommandParameter="Cancel"
+                    />
+                </Grid>
+            
+            </Border>
+            <Label
+                Grid.Row="2"
+                Margin="10"
+                FontSize="13"
+                Foreground="{StaticResource ErrorMessageBrush}"
+                Content="{Binding RegisterErrorMessage}" 
+                HorizontalAlignment="Center"
+            />
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

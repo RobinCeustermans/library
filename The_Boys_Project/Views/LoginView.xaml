@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="#FF364F6B"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+
+    <Grid Margin="20,0,20,0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel 
+            Margin="30"
+            xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom},Delay=500}">
+            <Grid>
+                <Ellipse
+                    Width="60"
+                    Height="60"
+                    Fill="{StaticResource PrimaryHueDarkBrush}"
+                    Margin="10"
+                />
+                <fa5:ImageAwesome 
+                    Icon="Solid_Book" 
+                    Width="25" 
+                    Height="Auto"
+                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                />
+            </Grid>
+
+            <StackPanel>
+                <TextBlock
+                    TextWrapping="Wrap" 
+                    FontWeight="DemiBold"
+                    Style="{DynamicResource MaterialDesignHeadline4TextBlock}">
+                    Welkom bij The Boys
+                </TextBlock>
+                <TextBlock
+                    FontWeight="Light"
+                    TextWrapping="Wrap"
+                    Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                    Log in of meld u aan!
+                </TextBlock>
+            </StackPanel>
+        </DockPanel>
+
+
+        <Border
+            xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+            BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+            Background="{StaticResource PrimaryHueDarkBrush}"
+            CornerRadius="15" 
+            BorderThickness="15"
+            Margin="20"
+            Padding="30,50,30,50"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            MaxWidth="550">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid
+                    Height="auto"
+                    Background="{StaticResource PrimaryHueDarkBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox
+                        x:Name="txtUserEmail"
+                        Grid.Row="0"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"
+                        MaxWidth="400"
+                        materialDesign:HintAssist.Hint="E-mailadres"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding Email}"
+                    />
+                    <PasswordBox
+                        x:Name="txtUserPassword"
+                        Grid.Row="1"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledPasswordBox}"
+                        MaxWidth="400"
+                        materialDesign:HintAssist.Hint="Wachtwoord"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                    />
+                    <Label 
+                    HorizontalAlignment="Center"
+                    Grid.Row="2"
+                    Content="{Binding ErrorMessage}" 
+                    Foreground="{StaticResource ErrorMessageBrush}"
+                    />
+                </Grid>
+
+                <Grid
+                    Height="Auto"
+                    MinHeight="200"
+                    Grid.Row="1"
+                    Background="{StaticResource PrimaryHueDarkBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button 
+                        x:Name="loginBtn"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        Grid.Row="0"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Content="Inloggen"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        Command="{Binding}"
+                        CommandParameter="Login"
+                    />
+                    <Button 
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        Grid.Row="1"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Content="Annuleren"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        Command="{Binding}"
+                        CommandParameter="Cancel"
+                    />
+                    <Button                         
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        Grid.Row="2"
+                        VerticalAlignment="Bottom"
+                        BorderThickness="0"
+                        Margin="10"
+                        Content="Nog geen account? Sign up!"
+                        Command="{Binding}" 
+                        CommandParameter="Registreren"
+                        Foreground="{StaticResource PrimaryHueMidForegroundBrush}"
+                    />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

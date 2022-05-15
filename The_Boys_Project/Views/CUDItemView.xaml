@@ -1,0 +1,506 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.CUDItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:The_Boys_Project.Views"          
+             mc:Ignorable="d" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto" Width="auto">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel 
+                Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom},Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_Book" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="{Binding ViewTitle}">
+                    </TextBlock>
+                    <TextBlock
+                        FontWeight="Light"
+                        TextWrapping="Wrap"
+                        Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                Background="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                MaxWidth="1500"
+                Grid.Row="1">
+                <Grid
+                    HorizontalAlignment="Center"
+                    Width="auto"
+                    Height="auto"
+                    Background="{StaticResource PrimaryHueDarkBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500" ></ColumnDefinition>
+                        <ColumnDefinition MaxWidth="50"></ColumnDefinition>
+                        <ColumnDefinition Width="500"></ColumnDefinition>
+                        <ColumnDefinition MaxWidth="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                   
+                        <TextBox
+                            Grid.Row="0"
+                            Text="{Binding Title, Mode=TwoWay}"
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Titel"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                   
+
+                    <StackPanel 
+                        Grid.Row="0" 
+                        Grid.Column="2">
+                        <DatePicker
+                            SelectedDate="{Binding PurchaseDate , Mode=TwoWay, ValidatesOnDataErrors=True}"  
+                            Focusable="False"
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledDatePicker}"                  
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Aankoopdatum"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" >
+                        <DatePicker
+                            SelectedDate="{Binding ReleaseDate, Mode=TwoWay,ValidatesOnDataErrors=True}"
+                            Focusable="False"
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledDatePicker}"                  
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Uitgavedatum"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Grid.Column="2">
+                        <TextBox
+                            Text="{Binding ISBN}"
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                            AcceptsReturn="False"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="ISBN"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+                    <StackPanel 
+                        Grid.Row="2" 
+                        MaxWidth="400"  
+                        Margin="10">
+                        <Label 
+                            Content="{Binding CbContributorTitle}" 
+                            MaxWidth="400" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center">
+                        </Label>
+                        <ComboBox
+                            ItemsSource="{Binding Contributors}"
+                            SelectedItem="{Binding SelectedContributor}"
+                            Style="{StaticResource MaterialDesignFilledComboBox}"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Auteur/s"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}">
+                        </ComboBox>
+                        <Button
+                            Command="{Binding}" 
+                            CommandParameter="AddAuthorOrCategory"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="0,10,0,0"
+                            Content="Nieuwe auteur Toevoegen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                    </StackPanel>
+
+                    <!--CONTRIBUTORS van NIEUW item-->
+
+                    <StackPanel 
+                        MaxWidth="400" 
+                        Margin="10" 
+                        Grid.Row="2" 
+                        Grid.Column="2" 
+                        Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource InverseBoolToVisConverter}}">
+                        <Label 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                            Toe te voegen auteurs
+                        </Label>
+                        <ListBox
+                            SelectedItem="{Binding SelectedNewContributor}"
+                            ItemsSource="{Binding ContributorsNewItems}"     
+                            Style="{StaticResource MaterialDesignListBox}"
+                            MinHeight="43"
+                            MaxHeight="200"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Background="{DynamicResource PrimaryHueMidBrush}"/>
+                    </StackPanel>
+
+                    <!--CONTRIBUTORS van BESTAAND item-->
+
+                    <StackPanel 
+                        MaxWidth="400"
+                        Margin="10" 
+                        Grid.Row="2" 
+                        Grid.Column="2" 
+                        Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                        <Label 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center">
+                            Auteurs
+                        </Label>
+                        <ListBox                 
+                            ItemsSource="{Binding ContributorItems}"
+                            DisplayMemberPath="Contributor"
+                            SelectedItem="{Binding SelectedContributItem}"
+                            Style="{StaticResource MaterialDesignListBox}"
+                            MinHeight="43"
+                            MaxHeight="200"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Background="{DynamicResource PrimaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+                    <Button
+                        xf:Animations.Primary="{xf:Animate BasedOn={StaticResource Expand},Event=MouseEnter,Duration=300}"
+                        xf:Animations.Secondary="{xf:Animate BasedOn={StaticResource Contract},Event=MouseLeave,Duration=150}" 
+                        Margin="5"
+                        Grid.Row="2"
+                        Grid.Column="1" 
+                        Command="{Binding}"
+                        CommandParameter="AddContributorToList"
+                        MaxWidth="30"
+                        MaxHeight="30"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                            Kind="Plus"
+                            Height="24"
+                            Width="24"
+                        />
+                    </Button>
+
+                    <Button 
+                        Margin="5" 
+                        Grid.Row="2" 
+                        Grid.Column="3" 
+                        xf:Animations.Primary="{xf:Animate BasedOn={StaticResource Expand},Event=MouseEnter,Duration=300}"
+                        xf:Animations.Secondary="{xf:Animate BasedOn={StaticResource Contract},Event=MouseLeave,Duration=150}"
+                        Command="{Binding}"
+                        CommandParameter="RemoveContributorFromItem"
+                        MaxWidth="30"
+                        MaxHeight="30"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                            Kind="Minus"
+                            Height="24"
+                            Width="24" />
+                    </Button>
+
+                    <StackPanel 
+                        Grid.Row="3" 
+                        MaxWidth="400"  
+                        Margin="10">
+                        <Label 
+                            Content="{Binding CbCategoryTitle}"
+                            MaxWidth="400"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
+                        </Label>
+                        <ComboBox
+                            ItemsSource="{Binding Categories}"
+                            DisplayMemberPath="Name"
+                            SelectedItem="{Binding SelectedCategory}"
+                            Style="{StaticResource MaterialDesignFilledComboBox}"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Categories/s"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"  
+                        />
+                        <Button
+                            Command="{Binding}" 
+                            CommandParameter="AddAuthorOrCategory"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="0,10,0,0"
+                            Content="Nieuwe categorie Toevoegen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                    </StackPanel>
+
+                    <!--GENRES van NIEUW item-->
+
+                    <StackPanel 
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        MaxWidth="400"
+                        Margin="10"
+                        Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource InverseBoolToVisConverter}}" >
+                        <Label>
+                            Toe te voegen genres
+                        </Label>
+                        <ListBox
+                            ItemsSource="{Binding CategoriesNewItems}"
+                            SelectedItem="{Binding SelectedNewCategory}"
+                            Style="{StaticResource MaterialDesignListBox}"
+                            MinHeight="43"
+                            MaxHeight="200"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Background="{DynamicResource PrimaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+                    <!--GENRES van BESTAAND item-->
+
+                    <StackPanel 
+                        Grid.Row="3" 
+                        Grid.Column="2" 
+                        MaxWidth="400"  
+                        Margin="10" 
+                        Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                        <Label>
+                            Genres
+                        </Label>
+                        <ListBox
+                            ItemsSource="{Binding ItemCategories}"
+                            SelectedItem="{Binding SelectedItemCategory}"
+                            DisplayMemberPath="Category"
+                            Style="{StaticResource MaterialDesignListBox}"
+                            MinHeight="43"
+                            MaxHeight="200"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Background="{DynamicResource PrimaryHueMidBrush}"
+                        />
+                    </StackPanel>
+
+
+                    <Button 
+                        Margin="5"  
+                        Grid.Row="3" 
+                        Grid.Column="1"
+                        xf:Animations.Primary="{xf:Animate BasedOn={StaticResource Expand}, Event=MouseEnter,Duration=300}"
+                        xf:Animations.Secondary="{xf:Animate BasedOn={StaticResource Contract},Event=MouseLeave,Duration=150}"
+                        Command="{Binding}" 
+                        CommandParameter="AddCategoryToList"
+                        MaxWidth="30"
+                        MaxHeight="30"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                            Kind="Plus"
+                            Height="24"
+                            Width="24" 
+                        />
+                    </Button>
+
+                    <Button 
+                        Margin="5" 
+                        Grid.Row="3" 
+                        Grid.Column="3"
+                        xf:Animations.Primary="{xf:Animate BasedOn={StaticResource Expand}, Event=MouseEnter,Duration=300}"
+                        xf:Animations.Secondary="{xf:Animate BasedOn={StaticResource Contract}, Event=MouseLeave,Duration=150}"
+                        Command="{Binding}" 
+                        CommandParameter="RemoveCategoryFromItem"
+                        MaxWidth="30"
+                        MaxHeight="30"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon
+                            Kind="Minus"
+                            Height="24"
+                            Width="24" 
+                        />
+                    </Button>
+
+                    <StackPanel Grid.Row="4">
+                        <ComboBox
+                            ItemsSource="{Binding AgeCategories}"
+                            SelectedValue="{Binding AgeCategoryID}"
+                            SelectedValuePath="AgeCategoryID"
+                            DisplayMemberPath="Description"
+                            Margin="10"
+                            Style="{StaticResource MaterialDesignFilledComboBox}"
+                            MaxWidth="400"
+                            materialDesign:HintAssist.Hint="Leeftijdscategorie"
+                            materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" 
+                        />
+                    </StackPanel>
+
+                    <StackPanel 
+                        MaxWidth="421"
+                        Grid.Row="4"
+                        Grid.Column="2">
+                        <DockPanel>
+                            <TextBox
+                                MinWidth="125"
+                                Width="auto"
+                                x:Name="txtSellPrice"
+                                PreviewTextInput="NumberValidationTextBox"
+                                Text="{Binding SellPrice}"
+                                Margin="10"
+                                Style="{StaticResource MaterialDesignFilledTextBox}"
+                                AcceptsReturn="False"
+                                HorizontalAlignment="Stretch"
+                                materialDesign:HintAssist.Hint="Prijs"
+                                materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                            />
+                            <Button 
+                                Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                MinHeight="43"
+                                Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                                Margin="10"
+                                Content="Aanbieden Verkoop"
+                                Command="{Binding}" CommandParameter="MakeBuyable"  
+                                Background="{StaticResource SecondaryHueMidBrush}"
+                                Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            />
+                        </DockPanel>
+                    </StackPanel>
+
+                    <!--deze plaats is voorzien voor een eventuele combobox met types, nu is er nog maar 1 type-->
+
+                    <DatePicker
+                        Grid.Row="5"  
+                        Grid.Column="2"
+                        SelectedDate="{Binding LifeSpan}"
+                        Focusable = "False"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"                  
+                        MaxWidth="400"
+                        Margin="10"
+                        materialDesign:HintAssist.Hint="Vervaldatum"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                    <TextBox  
+                        Grid.Row="6"  
+                        Text="{Binding Description}"
+                        Grid.ColumnSpan="3"
+                        Margin="48,10,48,10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"
+                        materialDesign:HintAssist.Hint="Beschrijving"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+
+
+                    <DockPanel 
+                        Grid.Row="7"
+                        Grid.ColumnSpan="4"
+                        MaxWidth="700" >
+                        <Button
+                            Command="{Binding}"
+                            CommandParameter="AddItem"
+                            Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource InverseBoolToVisConverter}}"
+                            Width="300"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Content="Toevoegen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                        <Button 
+                            Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding}" CommandParameter="EditItem"
+                            Width="300"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Content="Bewerken"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                        <Button 
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Width="300"
+                            Content="Annuleren"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Command="{Binding}"
+                            CommandParameter="Cancel"
+                        />
+                    </DockPanel>
+                </Grid>
+            </Border>
+
+            <Label
+                Margin="5,1,5,20"
+                MaxWidth="700"
+                Grid.Row="2"
+                FontSize="16"
+                Content="{Binding ErrorMessage}"
+                Foreground="{StaticResource ErrorMessageBrush}" 
+                HorizontalAlignment="Center"
+            />
+
+            <Label
+                Margin="5,1,5,20"
+                MaxWidth="700"
+                Grid.Row="2"
+                FontSize="16"
+                Content="{Binding SuccessMessage}"
+                Foreground="#FF1AB61A" HorizontalAlignment="Center"
+            />
+        </Grid>
+    </ScrollViewer>
+</UserControl>

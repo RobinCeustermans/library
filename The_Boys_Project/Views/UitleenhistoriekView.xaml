@@ -1,0 +1,225 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.UitleenhistoriekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d" 
+                          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel 
+                Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                    Width="60"
+                    Height="60"
+                    Fill="{StaticResource PrimaryHueDarkBrush}"
+                    Margin="10"
+                />
+                    <fa5:ImageAwesome 
+                    Icon="Solid_Book" 
+                    Width="25" 
+                    Height="Auto"
+                    Foreground="{StaticResource SecondaryHueMidBrush}"/>
+                </Grid>
+
+                <TextBlock
+                    TextWrapping="Wrap" 
+                    FontWeight="DemiBold"
+                    Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                    Text="{Binding SelectedItem.Title}">
+                </TextBlock>
+
+            </DockPanel>
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                Grid.Row="1">
+                <DataGrid
+                    MinHeight="200"
+                    MaxHeight="350"
+                    ItemsSource="{Binding UserItems}"
+                    SelectedItem="{Binding SelectedItem}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    x:Name="dgBooks" 
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="2*" Binding="{Binding User}" Header="Uitgeleend door"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding BorrowedDate, StringFormat=d}" Header="Uitgeleend op"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding ReturnedDate, StringFormat=d}" Header="Terug gebracht op"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <Grid
+                xf:Animations.Primary="{StaticResource SlideFromRight}"
+                Height="Auto"
+                MinHeight="200"
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="1"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                        Synopsis
+                        </TextBlock>
+                        <TextBlock
+                            LineHeight="25"
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Text="{Binding SelectedItem.Description}">
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <Border
+                    Grid.Column="2"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Details
+                        </TextBlock>
+                        
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Titel: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.Title}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Genre(s): "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.CategoriesToString}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Auteur(s): "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.ContributorsToString}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Leeftijd: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.AgeCategory.Description}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Uitgegeven op: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.ReleaseDateToString}">
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,197 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.CUDBookFairView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:The_Boys_Project.Views"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{StaticResource PrimaryHueMidBrush}"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+        FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto" Width="auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_Landmark" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="{Binding ViewTitle}">
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},
+                Delay=250}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                Background="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                MaxWidth="1500"
+                Grid.Row="1">
+                <Grid
+                    HorizontalAlignment="Center"
+                    Width="auto"
+                    Height="auto"
+                    Background="{StaticResource PrimaryHueDarkBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="83.566" ></ColumnDefinition>
+                        <ColumnDefinition Width="416.434"/>
+                        <ColumnDefinition Width="500"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        Grid.Row="0"
+                        Text="{Binding Name, Mode=TwoWay}"
+                        AutomationProperties.AutomationId="bookFairName"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"
+                        MaxWidth="400"
+                        materialDesign:HintAssist.Hint="Naam"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Grid.ColumnSpan="2"
+                    />
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Text="{Binding Location, Mode=TwoWay}"
+                        AutomationProperties.AutomationId="bookFairLocation"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"
+                        MaxWidth="400"
+                        materialDesign:HintAssist.Hint="Locatie"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                    <DatePicker Grid.Row="1"
+                        SelectedDate="{Binding StartDate , Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                        Focusable="False"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"                  
+                        MaxWidth="400"
+                        materialDesign:HintAssist.Hint="Startdatum"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}" Grid.ColumnSpan="2"
+                    />
+                    <DatePicker
+                        Grid.Row="1"
+                        Visibility="{Binding Path=TitleIsToevoegen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Grid.Column="2"
+                        SelectedDate="{Binding EndDate}"
+                        Focusable = "False"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"                  
+                        MaxWidth="400"
+                        Margin="10"
+                        materialDesign:HintAssist.Hint="Einddatum"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                    <TextBox  
+                        TextWrapping="Wrap"
+                        Grid.Row="2"  
+                        Text="{Binding Description}"
+                        AutomationProperties.AutomationId="bookFairDescription"
+                        Grid.ColumnSpan="3"
+                        Height="300"
+                        Margin="10"
+                        MaxWidth="850"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"
+                        materialDesign:HintAssist.Hint="Beschrijving"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                    <DockPanel
+                        Grid.Row="3"
+                        Grid.ColumnSpan="3"
+                        MaxWidth="700">
+                        <Button
+                            Command="{Binding}"
+                            CommandParameter="AddBookFair"
+                            Visibility="{Binding Path=ButtonCheck, Converter={StaticResource InverseBoolToVisConverter}}"
+                            Width="300"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Content="Toevoegen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                        <Button 
+                            Visibility="{Binding Path=ButtonCheck, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding}"
+                            CommandParameter="EditBookFair"
+                            Width="300"
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Content="Bewerken"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        />
+                        <Button 
+                            MinHeight="43"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Margin="10"
+                            Width="300"
+                            Content="Annuleren"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Command="{Binding}"
+                            CommandParameter="Cancel"
+                        />
+                    </DockPanel>
+                </Grid>
+            </Border>
+
+            <Label
+                Grid.Row="4"
+                FontSize="13"
+                Margin="10"
+                Content="{Binding ErrorMessage}"
+                Foreground="{StaticResource ErrorMessageBrush}" 
+                HorizontalAlignment="Center" 
+                Grid.Column="1"
+            />
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="The_Boys_Project.Views.MailEditorWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:The_Boys_Project.Views"
+        mc:Ignorable="d"
+        Title="MailEditorWindowView"  WindowState="Maximized">
+    
+    <ContentControl
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        Content="{Binding SelectedViewModel}"
+    />
+</Window>

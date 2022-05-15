@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.MailEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views" 
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel 
+                Margin="30,30,30,0"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_MailBulk" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}">
+                        Standaardmails aanpassen
+                    </TextBlock>
+                    <TextBlock
+                        FontWeight="Light"
+                        TextWrapping="Wrap"
+                        Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Hier kan je de inhoud van de automatische mails aanpassen.
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},
+                Delay=250}"
+                Grid.Row="1"
+                Margin="20,-30,20,0"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="35"
+                Height="auto"
+                MinHeight="300"
+                MaxHeight="450">
+                <wv2:WebView2 
+                    DefaultBackgroundColor="white"
+                    MaxHeight="500"
+                    x:Name="_webView"
+                    Source="{Binding Path}"/>
+            </Border>
+
+            <Grid
+                xf:Animations.Primary="{StaticResource SlideFromRight}"
+                Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Keywords
+                        </TextBlock>
+                        <TextBlock
+                            LineHeight="25"
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Text="{Binding KeyWords}">
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Height="60"
+                    MaxWidth="300"
+                    Margin="0,0,10,0"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    CornerRadius="15" 
+                    BorderThickness="10">
+                    <ComboBox    
+                        materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}"  
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                        materialDesign:HintAssist.Hint="Email om aan te passen"
+                        Width="200"
+                        Margin="30,0,30,5" 
+                        ItemsSource="{Binding Mails}"
+                        SelectedItem="{Binding SelectedMailToEdit}"
+                    />
+                </Border>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.Column="2">
+                    <Button 
+                        xf:Animations.Primary="{StaticResource SlideFromRight}"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Content="Deze mail aanpassen"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                        Click="Button_Click"
+                        Command="{Binding}"
+                        CommandParameter="ChangeMailText"
+                    />
+                    <Button 
+                        xf:Animations.Primary="{StaticResource SlideFromRight}"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        MaxWidth="200"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Content="Huidige mail weergeven"
+                        Background="{StaticResource SecondaryHueMidBrush}"
+                        Foreground="{StaticResource SecondaryHueMidForegroundBrush}" 
+                        Click="Button_Click_1"
+                        Command="{Binding}"
+                        CommandParameter="ShowMailText"
+                    />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

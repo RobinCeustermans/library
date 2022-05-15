@@ -1,0 +1,300 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.UserItemControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d" d:DesignWidth="800"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel 
+                Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_AddressBook" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="{Binding Title}"/>
+                    <Button
+                        Visibility="{Binding Path=UserHasFines, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        HorizontalAlignment="Left"
+                        FontWeight="DemiBold"
+                        Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                        Foreground="{StaticResource ErrorMessageBrush}"
+                        Background="Transparent"
+                        BorderBrush="{StaticResource ErrorMessageBrush}"                       
+                        BorderThickness="1"
+                        Content="{Binding FineText}"
+                        Command="{Binding}"
+                        CommandParameter="ManageFine"/>
+                </StackPanel>
+            </DockPanel>
+            
+            <Grid
+            xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+            Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="30">
+                    <TextBlock
+                        Text="Uitgeleende items"
+                        Margin="10"
+                    />
+                    <Border
+                        BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                        CornerRadius="15" 
+                        BorderThickness="15">
+                        <DataGrid
+                            MinHeight="150"
+                            MaxHeight="250"
+                            ItemsSource="{Binding BorrowedItems}"
+                            SelectedItem="{Binding SelectedBorrowedItem}"
+                            Background="{StaticResource PrimaryHueDarkBrush}" 
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="2*" Binding="{Binding Item.Title}" Header="Titel"/>
+                                <DataGridTextColumn Width="2*" Binding="{Binding BorrowedDate, StringFormat=d}" Header="Uitleendatum"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </StackPanel>
+                
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="30">
+                    <TextBlock
+                        Text="Gereserveerde items"
+                        Margin="10"/>
+                    <Border
+                        BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                        CornerRadius="15" 
+                        BorderThickness="15">
+                        <DataGrid
+                            MinHeight="150"
+                            MaxHeight="250"
+                            ItemsSource="{Binding ReservedItems}"
+                            SelectedItem="{Binding SelectedReservedItem}"
+                            Background="{StaticResource PrimaryHueDarkBrush}" 
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding Item.Title}" Header="Titel"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            
+            <Grid
+                xf:Animations.Primary="{StaticResource SlideFromRight}"
+                Height="Auto"
+                MinHeight="200"
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="1"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Details
+                        </TextBlock>
+                        
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Volledige naam: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding User}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Type lidmaatschap: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding User.MembershipType.Description}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="E-mailadres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding User.Email}">
+                                </TextBlock>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Adres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding User.FullAddress}">
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <Border
+                    Grid.Column="2"
+                    Margin="30"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Beheer boeken van lid
+                        </TextBlock>
+                        <Button                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek teruggebracht"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Command="{Binding}"
+                            CommandParameter="ConfirmReturned"/>
+                    </StackPanel>
+                </Border>
+                
+                <Border
+                    Grid.Column="2"
+                    Margin="30"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Beheer boeken van lid
+                        </TextBlock>
+                        <Button                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek teruggebracht"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="ConfirmReturned"
+                        />
+                        <Button                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek uitlenen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="ConfirmBorrowed"
+                        />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

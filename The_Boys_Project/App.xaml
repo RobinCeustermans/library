@@ -1,0 +1,93 @@
+<Application x:Class="The_Boys_Project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:The_Boys_Project"  
+             xmlns:views="clr-namespace:The_Boys_Project.Views"
+             xmlns:viewmodels="clr-namespace:The_Boys_Project.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             Startup="Application_Startup">
+            <!--Lines 5 & 6 import namespaces for views and viewmodels-->
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Material Design import-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Animations.xaml"/>
+
+                <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="SteelBlue" SecondaryColor="Green" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--Primary colors-->
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#43dde6"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#364f6b"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#304863"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White"/>
+
+            <!---Secondary color-->
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="Gold"/>
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#1F2E40"/>
+            
+            <!--Tertiary color-->
+            <SolidColorBrush x:Key="ErrorMessageBrush" Color="#FFF75F5F" />
+
+            <!--Data Templates are essentially used to assign views to viewmodels-->
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CUDItemViewModel}">
+                <views:CUDItemView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RegistrerenViewModel}">
+                <views:RegistrerenView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:UitleenhistoriekViewModel}">
+                <views:UitleenhistoriekView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookFairViewModel}">
+                <views:BookFairView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CUDBookFairViewModel}">
+                <views:CUDBookFairView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:FinesViewModel}">
+                <views:FinesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
+                <views:ProfileView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookFairDetailViewModel}">
+                <views:BookFairDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AuthorCategoryViewModel}">
+                <views:AuthorCategoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AdminUserDetailsViewModel}">
+                <views:AdminUserDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:UserItemControlViewModel}">
+                <views:UserItemControlView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:UserOverviewViewModel}">
+                <views:UserOverviewView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AdminOperationsViewModel}">
+                <views:AdminOperationsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MailEditorViewModel}">
+                <views:MailEditorView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MailEditorWindowViewModel}">
+                <views:MailEditorWindowView/>
+            </DataTemplate>
+
+            <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,488 @@
+<UserControl x:Class="The_Boys_Project.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+    
+    <ScrollViewer>
+        
+        <Grid Margin="20,0,20,0">
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Section 1: Title-->
+
+            <DockPanel 
+                Margin="30"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                Delay=500}">
+                <Grid>
+                    <Ellipse
+                        Width="60"
+                        Height="60"
+                        Fill="{StaticResource PrimaryHueDarkBrush}"
+                        Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_Book" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="{Binding Title}">
+                    </TextBlock>
+                    <TextBlock
+                        FontWeight="Light"
+                        TextWrapping="Wrap"
+                        Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Blader gerust eens door de boekenlijst.
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+
+            <!--Section 2: SearchBar + Errormessage -->
+
+            <StackPanel 
+                Grid.Row="1" 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Right"
+                xf:Animations.Primary="{StaticResource SlideFromRight}">
+                <Border
+                    Margin="0,0,10,0"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    CornerRadius="15" 
+                    BorderThickness="10">
+                    <ComboBox 
+                        MaxWidth="200"
+                        MinWidth="100"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}"  
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                        materialDesign:HintAssist.Hint="Categorie"
+                        DisplayMemberPath="Name"
+                        Margin="30,0,30,5"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}"/>
+                </Border>
+                <Border
+                    Margin="0,0,10,0"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    CornerRadius="15" 
+                    BorderThickness="10">
+                    <CheckBox
+                        MaxWidth="250"
+                        MinWidth="150"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}"
+                        Content="Beschikbaar voor aankoop"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                        materialDesign:HintAssist.Hint="Categorie"
+                        IsChecked="{Binding Buyable}"
+                        Margin="30,0,30,5"/>
+                </Border>
+                <Border
+                    Margin="0,0,10,0"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    CornerRadius="15" 
+                    BorderThickness="10">
+                    <ComboBox 
+                        MaxWidth="150"
+                        MinWidth="100"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}"     
+                        Foreground="Gold"
+                        materialDesign:HintAssist.Hint="Leeftijdscategorie"
+                        DisplayMemberPath="Description"
+                        Margin="30,0,30,5"
+                        ItemsSource="{Binding Ages}"
+                        SelectedItem="{Binding SelectedAge}"
+                    />
+                </Border>
+                <Border
+                    Margin="0,0,10,0"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    CornerRadius="15" 
+                    BorderThickness="10">
+                    <TextBox
+                        materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}" 
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                        materialDesign:HintAssist.Hint="Titel"
+                        MaxWidth="250"
+                        MinWidth="150"
+                        Margin="30,0,30,5"
+                        Text="{Binding BookTitle}"
+                     />
+                </Border>
+                <Button 
+                    Margin="0,0,0,0"
+                    Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                    Background="{StaticResource SecondaryHueMidBrush}" 
+                    Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                    Command="{Binding}"
+                    CommandParameter="Search" 
+                    Content="Zoeken">
+                </Button>
+                <Button 
+                    Margin="10,0,30,0"
+                    Background="{StaticResource SecondaryHueMidBrush}" 
+                    Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                    Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                    Command="{Binding}"
+                    CommandParameter="Reset">
+                    <fa5:ImageAwesome 
+                        Icon="Solid_Undo" 
+                        Width="17" 
+                        Height="Auto"   
+                    />
+                </Button>
+            </StackPanel>
+            <!--button-->
+            <Label
+                Margin="5,10,30,5"
+                MaxWidth="700"
+                Grid.Row="2"
+                FontSize="16"
+                Content="{Binding ErrorMessageBookSearch}"
+                Foreground="{StaticResource ErrorMessageBrush}" 
+                HorizontalAlignment="Right"
+            />
+            <!--Section 3: DataGrid-->
+            
+            <Border
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                Grid.Row="3">
+                <DataGrid
+                    MinHeight="250"
+                    MaxHeight="400"
+                    ItemsSource="{Binding Items}"
+                    SelectedItem="{Binding SelectedItem}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    x:Name="dgBooks" 
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="2*" Binding="{Binding Title}" Header="Titel"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding ReleaseDate, StringFormat=d, ConverterCulture=nl-BE }" Header="Uitgavedatum"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding ContributorsToString}" Header="Auteur(s)"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding CategoriesToString}" Header="Genre(s)"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!--Section 4: Synopsis, details and Buttons -->
+
+            <Grid
+                xf:Animations.Primary="{StaticResource SlideFromRight}"
+                Height="Auto"
+                MinHeight="200"
+                Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Synopsis
+                        </TextBlock>
+                        <TextBlock
+                            LineHeight="25"
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Text="{Binding SelectedItem.Description}">
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="1"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Details
+                        </TextBlock>
+                        <StackPanel>
+
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Titel: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.Title}">
+                                </TextBlock>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Genre(s): "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.CategoriesToString}">
+                                </TextBlock>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Auteur(s): "
+                                    MinWidth="130">
+                                </TextBlock>
+
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.ContributorsToString}">
+                                </TextBlock>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Leeftijd: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.AgeCategory.Description}">
+                                </TextBlock>
+                            </DockPanel>
+
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Uitgegeven op: "
+                                    MinWidth="130">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedItem.ReleaseDateToString}">
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <Border
+                    Grid.Column="2"
+                    Margin="30"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                       
+                        <!--Content visible to users-->
+                        
+                        <TextBlock
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource InverseBoolToVisConverter}}"
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Dit boek meenemen?
+                        </TextBlock>
+                       
+                        <DockPanel>
+                            <TextBlock
+                                Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource InverseBoolToVisConverter}}"
+                                Padding="20"
+                                TextWrapping="Wrap"
+                                Foreground="{StaticResource PrimaryHueMidForegroundBrush}"
+                                FontSize="16">
+                                Aantal huidige reservaties:
+                            </TextBlock>
+                            <TextBlock
+                                Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource InverseBoolToVisConverter}}"
+                                Padding="20"
+                                TextWrapping="Wrap"
+                                Foreground="{StaticResource PrimaryHueMidForegroundBrush}"
+                                FontSize="16"
+                                Text="{Binding AmountReservedByUser}">
+                            </TextBlock>
+                        </DockPanel>
+                        
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource InverseBoolToVisConverter}}"                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek reserveren"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="Reserveren"/>
+                        <Button
+                            xf:Animations.Primary="{xf:Animate BasedOn={StaticResource WiggleAnimation},Event=Visibility}"                                    
+                            Content="Ik wil dit boek!"
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Visibility="{Binding Path=ItemWithinSaleRangeAndNotAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding}"
+                            CommandParameter="InterestedInBook"
+                        />
+                        
+                        <!--Content visible to admins!-->
+
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Verloot Boek"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="RaffleBook"
+                        />
+                        <TextBlock
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Boekoperaties
+                        </TextBlock>
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek Toevoegen"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="Add"
+                        />
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek Bewerken"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="Edit"
+                        />
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"                        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Uitleenhistoriek"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="Uitleenhistoriek"
+                        />
+                        <Button
+                            Visibility="{Binding Path=UserIsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Boek Verwijderen"
+                            Background="{StaticResource ErrorMessageBrush}"
+                            BorderBrush="{StaticResource ErrorMessageBrush}"
+                            Foreground="White"
+                            Command="{Binding}"
+                            CommandParameter="DeleteItem"
+                         />
+                        
+                        <!--End content visible to admins-->
+                    
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

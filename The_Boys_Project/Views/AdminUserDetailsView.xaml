@@ -1,0 +1,364 @@
+<UserControl x:Class="The_Boys_Project.Views.AdminUserDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="30">
+                <Grid>
+                    <Ellipse
+                    Width="60"
+                    Height="60"
+                    Fill="{StaticResource PrimaryHueDarkBrush}"
+                    Margin="10"
+                    />
+                    <fa5:ImageAwesome 
+                        Icon="Solid_Book" 
+                        Width="25" 
+                        Height="Auto"
+                        Foreground="{StaticResource SecondaryHueMidBrush}"
+                    />
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="Accountoverzicht">
+                    </TextBlock>
+                    <TextBlock  
+                        TextWrapping="Wrap" 
+                        FontWeight="Light"
+                        Style="{DynamicResource MaterialDesignBody1TextBlock}" 
+                        Text="Bekijk hier uw accountgegevens.">
+                    </TextBlock>
+                    <StackPanel 
+                      Orientation="Horizontal"
+                      Margin="4">
+                        <RadioButton 
+                            IsChecked="{Binding FirstTab}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                            Margin="4"
+                            Content="Accountgegevens"
+                        />
+                        <RadioButton 
+                            IsChecked="{Binding SecondTab}"
+                            Visibility="{Binding Path=IsUser, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                            Margin="4"
+                            Content="Reservaties en ingeschreven boekenbeurzen"
+                        />
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+            
+            <Grid
+                Visibility="{Binding Path=FirstTab, Converter={StaticResource BooleanToVisibilityConverter}}"  
+                Background="{StaticResource PrimaryHueDarkBrush}" 
+                Height="Auto"
+                Width="Auto"
+                MinHeight="550"
+                MinWidth="800"
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel 
+                    Grid.ColumnSpan="2">
+                    <Label 
+                        Content="E-mail">
+                    </Label>
+                    <TextBox 
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="E-mailadres"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.Email}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.Column="2" 
+                    Grid.ColumnSpan="2">
+                    <Label 
+                        Content="Naam">
+                    </Label>
+                    <TextBox  
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Naam"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.Name}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.ColumnSpan="2" 
+                    Grid.Column="2" 
+                    Grid.Row="1">
+                    <Label 
+                        Content="Voornaam">
+                    </Label>
+                    <TextBox 
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Voornaam"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.Surname}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.ColumnSpan="2" 
+                    Grid.Column="2" 
+                    Grid.Row="2" >
+                    <Label 
+                        Content="Straat">
+                    </Label>
+                    <TextBox 
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Straat"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.StreetName}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.Row="2">
+                    <Label 
+                        Content="Postcode">
+                    </Label>
+                    <TextBox  
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Postcode"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.PostalCode}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.ColumnSpan="2" 
+                    Grid.Row="1">
+                    <Label 
+                        Content="Land">
+                    </Label>
+                    <TextBox 
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Land"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.Country}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.Column="1" 
+                    Grid.Row="2">
+                    <Label 
+                        Content="Postcode">
+                    </Label>
+                    <TextBox  
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="Huisnummer"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.HouseNumber}"
+                    />
+                </StackPanel>
+                
+                <StackPanel 
+                    Grid.Row="3" 
+                    Grid.ColumnSpan="2">
+                    <Label 
+                        Content="Lidmaatschap">
+                    </Label>
+                    <TextBox  
+                        IsReadOnly="True"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="False"                  
+                        materialDesign:HintAssist.Hint="MembershipType"
+                        materialDesign:HintAssist.Foreground="{StaticResource SecondaryHueMidBrush}"
+                        Text="{Binding User.MembershipType.Description}"
+                    />
+                </StackPanel>
+                
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    Grid.Row="4" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2"
+                    FontWeight="DemiBold"
+                    Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                    Text="{Binding Foutmelding}"  
+                    FontSize="20">
+                </TextBlock>
+            </Grid>
+            
+            <Grid 
+                Grid.Row="1" 
+                Visibility="{Binding Path=SecondTab, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="30px"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="Reservaties" FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    </TextBlock>
+                    <DataGrid
+                        ItemsSource="{Binding ReserveduserItems}"
+                        Background="{StaticResource PrimaryHueDarkBrush}"
+                        x:Name="dgReservations" 
+                        AutoGenerateColumns="False"
+                        MinHeight="100"
+                        MaxHeight="150"
+                        IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="2*" Binding="{Binding Item.Title}" Header="Titel"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding ReservedUntil, StringFormat=d}" Header="Gereserveerd tot "/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Margin="0,10,0,0"
+                    Grid.Column="3">
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="Ingeschreven Boekenbeurzen" FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    </TextBlock>
+                    <DataGrid
+                        Background="{StaticResource PrimaryHueDarkBrush}"
+                        ItemsSource="{Binding UserBookFairs}"
+                        x:Name="dgBookFairs" 
+                        MinHeight="100"
+                        MaxHeight="150"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="2*" Binding="{Binding BookFair.Name}" Header="Naam"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding BookFair.StartDate, StringFormat=d}" Header="StartDatum"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Margin="0,10,0,0"
+                    Grid.Row="1">
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="Uitgeleende Items" FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    </TextBlock>
+                    <DataGrid
+                        Background="{StaticResource PrimaryHueDarkBrush}"
+                        ItemsSource="{Binding BorroweduserItems}"
+                        x:Name="dgUserItems" 
+                        MinHeight="100"
+                        MaxHeight="150"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="2*" Binding="{Binding Item.Title}" Header="Titel"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding BorrowedDate, StringFormat=d}" Header="Uitgeleend op"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding DueDate, StringFormat=d}" Header="Opleveringsdatum"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding ReturnedDate, StringFormat=d}" Header="Teruggebracht op"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Margin="0,10,0,0"
+                    Grid.Row="1" 
+                    Grid.Column="3">
+                    <TextBlock
+                        TextWrapping="Wrap" 
+                        FontWeight="DemiBold"
+                        Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                        Text="Boetes" FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    </TextBlock>
+                    <DataGrid
+                        Background="{StaticResource PrimaryHueDarkBrush}"
+                        ItemsSource="{Binding UserFines}"
+                        x:Name="dgFines" 
+                        AutoGenerateColumns="False"
+                        MinHeight="100"
+                        MaxHeight="150"
+                        IsReadOnly="True" 
+                        Grid.Row="5" 
+                        Grid.Column="2" 
+                        Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="2*" Binding="{Binding Item.Title}" Header="Naam"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding Amount}" Header="Boete"/>
+                            <DataGridTextColumn Width="2*" Binding="{Binding IsPaidToString}" Header="Betaald"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

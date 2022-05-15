@@ -1,0 +1,428 @@
+﻿<UserControl x:Class="The_Boys_Project.Views.FinesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:The_Boys_Project.Views"
+             mc:Ignorable="d"              
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{StaticResource PrimaryHueMidBrush}"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             FontFamily="{DynamicResource MaterialDesignFont}" Height="Auto">
+
+    <ScrollViewer>
+
+        <Grid Margin="20,0,20,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <DockPanel 
+                    Margin="30,30,30,0"
+                    xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromBottom}, 
+                    Delay=500}">
+                    <Grid>
+                        <Ellipse
+                            Width="60"
+                            Height="60"
+                            Fill="{StaticResource PrimaryHueDarkBrush}"
+                            Margin="10"
+                        />
+                        <fa5:ImageAwesome 
+                            Icon="Solid_MoneyBill" 
+                            Width="30" 
+                            Height="Auto"
+                            Foreground="{StaticResource SecondaryHueMidBrush}"
+                        />
+                    </Grid>
+
+                    <StackPanel>
+                        <TextBlock
+                            TextWrapping="Wrap" 
+                            FontWeight="DemiBold"
+                            Style="{DynamicResource MaterialDesignHeadline4TextBlock}"
+                            Text="Boeteoverzicht">
+                        </TextBlock>
+                        <TextBlock
+                            FontWeight="Light"
+                            TextWrapping="Wrap"
+                            Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                            Bekijk of beheer hier de boetes.
+                        </TextBlock>
+                    </StackPanel>
+
+                </DockPanel>
+                <Grid>
+                    <StackPanel 
+                        xf:Animations.Primary="{StaticResource SlideFromRight}"
+                        Orientation="Horizontal"
+                        Margin="4">
+                        <RadioButton 
+                            IsChecked="{Binding PerUserTabToggled}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                            Margin="4"
+                            Content="Per gebruiker"
+                        />
+                        <RadioButton 
+                            IsChecked="{Binding PerFineTabToggled}"
+                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                            Margin="4"
+                            Content="Per boete"
+                        />
+                    </StackPanel>
+
+                    <DockPanel
+                        HorizontalAlignment="Right">
+                        <Border
+                            Margin="0,0,10,0"
+                            BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                            Background="{StaticResource PrimaryHueDarkBrush}"
+                            CornerRadius="15" 
+                            BorderThickness="10">
+                            <TextBox
+                                materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource SecondaryHueMidBrush}" 
+                                Foreground="{StaticResource SecondaryHueMidBrush}"
+                                materialDesign:HintAssist.Hint="Gebruiker"
+                                MaxWidth="250"
+                                MinWidth="150"
+                                Margin="30,0,30,5"
+                                Text="{Binding SearchValue}"
+                            />
+                        </Border>
+                        <Button 
+                            Margin="0,0,0,0"
+                            Background="{StaticResource SecondaryHueMidBrush}" 
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="Search" 
+                            Content="Zoeken">
+                        </Button>
+                        <Button 
+                            Margin="10,0,30,0"
+                            Background="{StaticResource SecondaryHueMidBrush}" 
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"   
+                            Command="{Binding}"
+                            CommandParameter="Reset">
+                            <fa5:ImageAwesome 
+                                Icon="Solid_Undo" 
+                                Width="17" 
+                                Height="Auto"   
+                            />
+                        </Button>
+                    </DockPanel>
+                </Grid>
+            </StackPanel>
+            
+            <!--Datagrid per user-->
+            
+            <Border
+                Visibility="{Binding Path=PerUserTabToggled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250}"
+                xf:Animations.Secondary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250, Event=Visibility}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                Background="{StaticResource PrimaryHueDarkBrush}"
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                Grid.Row="1">
+                <DataGrid
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    AutoGenerateColumns="False"
+                    MaxHeight="300"
+                    IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="2*" Binding="{Binding FullName}" Header="Shuldige"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding TotalFine}" Header="Bedrag"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!--Datagrid per fine-->
+            
+            <Border
+                Visibility="{Binding Path=PerFineTabToggled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrowHorizontally},Delay=250, Event=Visibility}"
+                BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                CornerRadius="15" 
+                BorderThickness="15"
+                Margin="30"
+                Background="{StaticResource PrimaryHueDarkBrush}"
+                Grid.Row="1">
+                <DataGrid
+                    ItemsSource="{Binding Fines}"
+                    SelectedItem="{Binding SelectedFine}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    AutoGenerateColumns="False"
+                    MinHeight="200"
+                    MaxHeight="300"
+                    IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="2*" Binding="{Binding User.FullName}" Header="Shuldige"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding Item.Title}" Header="Boek"/>
+                        <DataGridTextColumn Width="2*" Binding="{Binding Amount}" Header="Bedrag"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <Grid
+                xf:Animations.Primary="{StaticResource SlideFromRight}"
+                Height="Auto"
+                MinHeight="200"
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Details per user tab-->
+                
+                <Border
+                    Visibility="{Binding Path=PerUserTabToggled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Grid.Column="1"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Details
+                        </TextBlock>
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Volledige naam: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedUser}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Type lidmaatschap: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedUser.MembershipType.Description}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="E-mailadres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedUser.Email}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Adres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedUser.FullAddress}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Boetelijst: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedUser.OverdueBooks}">
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!--Details per fine tab-->
+                
+                <Border
+                    Visibility="{Binding Path=PerFineTabToggled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Grid.Column="1"
+                    Margin="30" 
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                        Background="{StaticResource PrimaryHueDarkBrush}">
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Details
+                        </TextBlock>
+                        
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Volledige naam: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedFine.User}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Type lidmaatschap: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedFine.User.MembershipType.Description}">
+                                </TextBlock>
+                            </DockPanel>
+                            
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="E-mailadres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedFine.User.Email}">
+                                </TextBlock>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock
+                                    Foreground="{StaticResource SecondaryHueMidBrush}"
+                                    LineHeight="25"
+                                    Padding="20, 0, 0 ,5"
+                                    TextWrapping="Wrap"
+                                    Text="Adres: "
+                                    MinWidth="150">
+                                </TextBlock>
+                                <TextBlock
+                                    LineHeight="25"
+                                    Padding="10, 0, 0, 5"
+                                    TextWrapping="Wrap"
+                                    Text="{Binding SelectedFine.User.FullAddress}">
+                                </TextBlock>
+                            </DockPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border
+                    Grid.Column="2"
+                    Margin="30"
+                    BorderBrush="{StaticResource PrimaryHueDarkBrush}" 
+                    CornerRadius="15" 
+                    BorderThickness="15"
+                    Height="auto"
+                    MinHeight="250"
+                    MaxHeight="350">
+                    <StackPanel
+                         Background="{StaticResource PrimaryHueDarkBrush}">
+                        <!--Content visible to users-->
+                        <TextBlock
+                            Padding="20"
+                            TextWrapping="Wrap"
+                            Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                            FontSize="24">
+                            Betaling beheren
+                        </TextBlock>
+                        <Button        
+                            VerticalAlignment="Bottom"
+                            Margin="20,5,20,5"
+                            Content="Bevestig betaling"
+                            Background="{StaticResource SecondaryHueMidBrush}"
+                            Foreground="{StaticResource SecondaryHueMidForegroundBrush}"
+                            Style="{StaticResource MaterialDesignOutlinedSecondaryButton}"
+                            Command="{Binding}"
+                            CommandParameter="ConfirmPaid"
+                        />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
